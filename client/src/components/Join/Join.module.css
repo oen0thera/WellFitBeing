@@ -1,0 +1,11 @@
+.section{
+    background-color: var(--color-bg);
+    border-width: 1px;
+    border-color: var(--color-gray);
+    border-radius: 20px;
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

@@ -1,0 +1,39 @@
+.Timetask-body{
+    position: relative;
+    top: -2780px;
+    
+}
+.Time-task{
+    position: relative;
+    width: 920px;
+    height: auto;
+    gap: 0;
+    left: 50px;
+    justify-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(32,50px);
+    
+}
+.Time-line-container{
+    position: relative;
+    visibility: visible;
+}
+
+.Time-line{
+    position: absolute;
+    width:40px;
+    height: 80px;   
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color:#4ade80;
+    visibility: visible;
+}
+    .Time-line.selected{
+    visibility: visible;
+    z-index:2;
+    }
+    .Time-line.close{
+        visibility: hidden;
+    }
+

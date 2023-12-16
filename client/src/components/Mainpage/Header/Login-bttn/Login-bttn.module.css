@@ -1,0 +1,280 @@
+.Login-div {
+    text-align: right;
+    justify-content: right;
+    right: 0%;
+    top: 2.5%;
+    z-index:5;
+    width: 300px;
+    height: 50px;
+    float: right;
+    position: absolute;
+}
+
+.Login-bttn {
+    margin: 5px;
+    padding: 2px;
+    width: 80px;
+    height: 35px;
+    color: #fff;
+    border: 4px solid #4ade80;
+    border-radius: 20px;
+    transition: all 0.5s;
+    background: #4ade80;
+    font-family: 'Black Han Sans', sans-serif;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #ffffff;
+}
+
+    .Login-bttn:hover {
+        box-shadow: inset 0 0 0 100vmax #fff;
+        color: #4ade80;
+        transform: none;
+    }
+
+    .Login-bttn.active {
+        margin: 5px;
+        padding: 2px;
+        width: 80px;
+        height: 35px;
+        border: 4px solid #000;
+        color: #000;
+        border-radius: 20px;
+        transition: all 0.5s;
+        background: #fff;
+        font-family: 'Black Han Sans', sans-serif;
+        cursor: pointer;
+        box-shadow: inset 0 0 0 0 #fff;
+    }
+
+    .Login-bttn.close {
+        visibility: hidden;
+        transition: visibility 0.5s linear;
+    }
+
+    .Login-bttn.mod-confirm {
+        height: 32px;
+        position: relative;
+        top: 90px;
+        left: 150px;
+        visibility: hidden;
+    }
+    .ModifyInfo-div.active .Login-bttn.mod-confirm{
+        visibility: visible;
+    }
+
+
+.ModifyInfo-bttn {
+        margin: 5px;
+        padding: 2px;
+        width: 80px;
+        height: 35px;
+        color: #fff;
+        border: 4px solid #4ade80;
+        border-radius: 20px;
+        transition: all 0.5s;
+        background: #4ade80;
+        font-family: 'Black Han Sans', sans-serif;
+        cursor: pointer;
+        box-shadow: inset 0 0 0 0 #ffffff;
+        animation: scale-in-center 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    }
+    
+        .ModifyInfo-bttn:hover {
+            box-shadow: inset 0 0 0 100vmax #fff;
+            color: #4ade80;
+            transform: none;
+        }
+    
+        .ModifyInfo-bttn.close {
+            transition: visibility 0.5s linear;
+            visibility: hidden;
+            animation: scale-out-center 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        }
+
+.Login-popup {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    float: left;
+    top: 15%;
+    right: 900%;
+    position: relative;
+    width: 500px;
+    height: 180px;
+    border: 4px solid black;
+    font-family: 'Black Han Sans', sans-serif;
+    background-color: #fff;
+    z-index: 1;
+    display: block;
+    visibility: hidden;
+}
+
+    .Login-popup.active {
+        animation: scale-in-center 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        visibility: visible;
+    }
+
+    .Login-popup.close {
+        animation: scale-out-center 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        transition: visibility 0.5s linear;
+    }
+
+.Popuptext-div {
+    width: auto;
+    height: 50%;
+    border: 4px solid black;
+    padding: 20px;
+    font-family: 'Black Han Sans', sans-serif;
+    background-color: #fff;
+    text-align: center;
+    margin: 5px;
+    white-space: pre-wrap;
+}
+
+.Popupbttn-div {
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    margin-top: 10px;
+    left: 80%;
+}
+
+.ModifyInfo-div{
+    width : 500px;
+    height: 400px;
+    position: relative;
+    right: 60%;
+    border: 4px solid #4ade80;
+    padding: 10px;
+    font-family: 'Black Han Sans', sans-serif;
+    background-color: #4ade80;
+    text-align: left;
+    margin: 2px;
+    border-radius:20px;
+    
+}
+.ModifyInfo-div.active{
+    visibility:visible;
+    animation: File-popup 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+}
+.ModifyInfo-div.close{
+    visibility:hidden;
+    transition: visibility 0.5s linear;
+    animation: File-hide 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+}
+.ModifyInfo-content{
+    height:370px;
+    background-color: #a0a096;
+    border: 4px solid #a0a096;
+    border-radius:20px;
+    padding: 10px;
+    
+}
+.ModifyInfo-Inputspace{
+    height:340px;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-bottom: 120px;
+    background-color: white;
+    border: 4px solid white;
+    border-radius:20px;
+    font-size: 17px;
+    display:flex;
+    justify-content:space-around;
+    flex-direction:column;
+}
+.ModifyInfo-Input{
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-left: 10px;
+    padding-left: 4px;
+    font-size: 15px;
+    justify-content: center;
+    margin: 8px;
+}
+.ModifyInfo-Input.age{
+    text-align: center;
+}
+.ModifyInfo-Input.email{
+    width: 150px;
+}
+.ModifyInfo-Input.email.id{
+    
+}
+.ModifyInfo-Input.email.loc{
+    padding:3px;
+}
+.Modifygender-div{
+    font-size: 15px;
+}
+.gender-label{
+    margin-right:50px;
+    font-size: 18px;
+}
+.Modifygender-input{
+    margin-right: 20px;
+}
+
+@keyframes File-popup {
+    0% {
+        -webkit-transform: rotateX(-100deg);
+        transform: rotateX(-100deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 1;
+    }
+}
+
+@keyframes File-hide {
+    0% {
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: rotateX(-100deg);
+        transform: rotateX(-100deg);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+        opacity: 0;
+    }
+}
+
+@keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-out-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+}

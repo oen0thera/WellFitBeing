@@ -1,0 +1,12 @@
+.Time-table{
+    position : relative;
+    z-index: 0;
+    width : 0px;
+    top : -330px;
+    left: -30px;
+}
+.Time-line{
+    width:80px;
+    font-family: 'Black Han Sans', sans-serif;
+    padding-bottom:26px;
+}
