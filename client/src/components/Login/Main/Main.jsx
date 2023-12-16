@@ -103,7 +103,7 @@ export default function Main() {
           />
         </div>
       </form>
-      <div className="flex items-center justify-center h-1/3 w-4/5  mb-2 rounded-md text-lg bg-titlegreen font-bold text-blackBttn">
+      <div className="flex items-center justify-center h-1/3 w-4/5  mb-6 rounded-md text-lg bg-titlegreen font-bold text-blackBttn">
         <div>
           <span>
             <RiLoginBoxLine size='24' color='#000000'/>
@@ -117,7 +117,7 @@ export default function Main() {
           </button>
         </div>
         </div>
-      <div className="flex items-center justify-center h-1/3 w-4/5  mb-2 rounded-md text-lg font-bold bg-titlegreen text-blackBttn">
+      {/* <div className="flex items-center justify-center h-1/3 w-4/5  mb-2 rounded-md text-lg font-bold bg-titlegreen text-blackBttn">
         <div>
           <span>
             <BiLogoGoogle size='24' color='#000000'/>
@@ -130,7 +130,7 @@ export default function Main() {
             &nbsp;구글 로그인
           </button>
         </div>
-        </div>
+        </div> */}
       </div>
   );
 }

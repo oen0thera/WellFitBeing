@@ -76,7 +76,7 @@ export default function Main() {
           />
         </div>
     </form>
-    <button className='bg-blackBttn rounded-md font-bold text-lg text-myWhite
+    <button className='bg-titlegreen rounded-md font-bold text-lg text-myBlack
      h-1/4 w-full my-5 hover:brightness-125' onClick={()=>handleSubmit()}>가입하기</button>
     </div>
       

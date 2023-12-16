@@ -10,6 +10,7 @@ import Logo from '../Join/Logo/Logo';
 export default function Join() {
     return (
         <div className='h-full w-full flex flex-col justify-center items-center'>
+        <Logo />
         <section className={styles.section}>
             <Header />
             <Main />

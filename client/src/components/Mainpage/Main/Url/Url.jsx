@@ -34,6 +34,15 @@ const Url = () => {
         console.log(C);
       }
       else{
+        if(addTime){
+          setAddTime(false);
+        }
+        if(modTime){
+          setModTime(false);
+        }
+        if(delTime){
+          setDelTime(false)
+        }
           setSelectDate(true);
           console.log('close');
           console.log(setSelectDate);
@@ -53,6 +62,15 @@ const Url = () => {
 
       }
       else{
+        if(isSelectDate){
+          setSelectDate(false);
+        }
+        if(modTime){
+          setModTime(false);
+        }
+        if(delTime){
+          setDelTime(false)
+        }
         setAddTime(true);
           console.log('close');
           console.log(setAddTime);
@@ -63,14 +81,49 @@ const Url = () => {
         setModTime(false);
       }
       else{
+        if(isSelectDate){
+          setSelectDate(false);
+        }
         if(delTime){
           setDelTime(false)
+        }
+        if(addTime){
+          setAddTime(false);
         }
         setModTime(true);
       }
     }
+
+    const ToggleTimeDel = () =>{
+      if (delTime){
+        console.log("Here");
+        setDelTime(false);
+      }
+      else{
+        if(isSelectDate){
+          setSelectDate(false);
+        }
+        if(modTime){
+          setModTime(false);
+        }
+        if(addTime){
+          setAddTime(false);
+        }
+        console.log("changer");
+        setDelTime(true);
+      }
+    }
+    
     const ToggleSelectedMod = (timeInput) =>{
       setModToggle(timeInput);
+    }
+    const ToggleIsExcercise = () =>{
+      setIsExcercise(false);
+      console.log("isExcercise:",isExcercise);
+    }
+    const ToggleIsDiet = () =>{
+      setIsDiet(false);
+      console.log("isExcercise:",isDiet);
     }
     const getTimeTables = (times) =>{
       setTotalTimetable(times);
@@ -96,25 +149,17 @@ const Url = () => {
       }
     }
 
-    const ToggleTimeDel = () =>{
-      if (delTime){
-        console.log("Here");
-        setDelTime(false);
-      }
-      else{
-        if(modTime){
-          setModTime(false);
-        }
-        console.log("changer");
-        setDelTime(true);
-      }
-    }
+    
     const[selectId, setSelectId] = useState('');
     const [selectedIds, setSelectedIds] = useState([]);
     const [totalTimetable, setTotalTimetable] = useState([]);
     const[calcId, setCalcId] = useState('');
     const [startTime, setStartTime] = useState('06:00');
     const [endTime, setEndTime] = useState('12:00');
+    const [isExcercise, setIsExcercise] = useState(false);
+    const [isDiet, setIsDiet] = useState(false);
+    const [recommendDietTime, setRecommendDietTime] = useState([]);
+    const [recommendExcerciseTime, setRecommendExcerciseTime] = useState([]);
     const handleNameValue = (event) => {
       const newValue = { name: event.target.value || ''};
       setNameValue(newValue.name);
@@ -150,6 +195,7 @@ const Url = () => {
     useEffect(()=>{
       console.log('selectedIds changed:', selectedIds);
     },[selectedIds])
+    
     useEffect(()=>{
       console.log('totalTimetable changed:', totalTimetable);
     },[totalTimetable]);
@@ -181,7 +227,7 @@ const Url = () => {
           console.log('comparing time vertically',compTimeStartTime,compTimeEndTime);
           const selectedTimeStartTime = parseInt(selectedStartTime.slice(0,2)) + parseFloat(selectedStartTime.slice(3,5))/60;
           const selectedTimeEndTime = parseInt(selectedEndTime.slice(0,2)) + parseFloat(selectedEndTime.slice(3,5))/60;
-          if ((selectedTimeStartTime>=compTimeStartTime && selectedTimeStartTime<compTimeEndTime)||(selectedTimeEndTime>compTimeStartTime && selectedTimeEndTime<=compTimeEndTime)||(compTimeStartTime>=selectedTimeStartTime && compTimeStartTime<selectedTimeEndTime)||(compTimeEndTime>selectedTimeStartTime && compTimeEndTime<=selectedTimeEndTime)){
+          if ((selectedTimeStartTime>=compTimeStartTime && selectedTimeStartTime<compTimeEndTime)||(selectedTimeEndTime>compTimeStartTime && selectedTimeEndTime<=compTimeEndTime)||(compTimeStartTime>=selectedTimeStartTime && compTimeEndTime<=selectedTimeEndTime)||(compTimeStartTime<selectedTimeStartTime && compTimeEndTime>selectedTimeEndTime)){
             return true;
           }
         }
@@ -214,18 +260,102 @@ const Url = () => {
       }
       return 0;
     }
+    // 추후에 지울것. 테스트용 함수 코드
+    const setExcerciseTime = () =>{
+      setRecommendExcerciseTime(['18:20','19:40']);
+    }
+    const setDietTime = () =>{
+      setRecommendDietTime(['12:30','13:30']);
+    }
+    useEffect(()=>{
+      console.log('recommendExcerciseTime:', recommendExcerciseTime);
+      let startTime = JSON.stringify(recommendExcerciseTime[0]);
+      let endTime = JSON.stringify(recommendExcerciseTime[1]);
+      console.log(startTime,endTime);
+      if(startTime&&endTime){
+        let newId = timeSelect(parseInt(startTime.slice(1,3)));
+        setSelectId(newId);
+        setCalcId(newId);
+        console.log(newId);
+        console.log(startTime.slice(1,3));
+        let hourDiff = parseInt(endTime.slice(1,3))-parseInt(startTime.slice(1,3));
+        if (hourDiff>=0){
+          }
+        else{
+          hourDiff = 24+parseInt(hourDiff);
+          }
+        let minDiff = parseInt(endTime.slice(4,6))-parseInt(startTime.slice(4,6));
+        if (minDiff>=0){
+        }
+        else{
+          hourDiff-=1;
+          minDiff = 60+parseInt(minDiff);
+        }
+        console.log(hourDiff,minDiff);
+        let timeDiff = (hourDiff*60+minDiff)/60;
+        console.log(timeDiff);
+        setSelectHeight(timeDiff);
+        setApplyName("운동스케줄 추천 시간");
+        setSelectTime([startTime.slice(1,6),endTime.slice(1,6)]);
+        setIsExcercise(true);
+      }
+      
+      
+    },[recommendExcerciseTime])
+    useEffect(()=>{
+      console.log('recommendDietTime:', recommendDietTime);
+      let startTime = JSON.stringify(recommendDietTime[0]);
+      let endTime = JSON.stringify(recommendDietTime[1]);
+      console.log(startTime,endTime);
+      if(startTime&&endTime){
+        let newId = timeSelect(parseInt(startTime.slice(1,3)));
+        setSelectId(newId);
+        setCalcId(newId);
+        console.log(newId);
+        console.log(startTime.slice(1,3));
+        let hourDiff = parseInt(endTime.slice(1,3))-parseInt(startTime.slice(1,3));
+        if (hourDiff>=0){
+          }
+        else{
+          hourDiff = 24+parseInt(hourDiff);
+          }
+        let minDiff = parseInt(endTime.slice(4,6))-parseInt(startTime.slice(4,6));
+        if (minDiff>=0){
+        }
+        else{
+          hourDiff-=1;
+          minDiff = 60+parseInt(minDiff);
+        }
+        console.log(hourDiff,minDiff);
+        let timeDiff = (hourDiff*60+minDiff)/60;
+        console.log(timeDiff);
+        setSelectHeight(timeDiff);
+        setApplyName("식사스케줄 추천 시간");
+        setSelectTime([startTime.slice(1,6),endTime.slice(1,6)]);
+        setIsDiet(true);
+      }
+      
+      
+    },[recommendDietTime])
+
+    const RecommendExcerciseTimetask = ()=>{
+      
+      console.log(recommendExcerciseTime);
+      
+    }
+
     const timeCalc = () =>{
       console.log("Time Calc function");
       console.log(startTime,endTime);
       console.log(startTime.slice(0,2),startTime.slice(3,5));
       console.log(endTime.slice(0,2),endTime.slice(3,5));
-      
-      let newId = timeSelect(parseInt(startTime.slice(0,3)));
       if (startTime==endTime){
         setSelectTime([startTime,endTime]);
         alert("startTime cannot be same to endTime");
         return;
       }
+      let newId = timeSelect(parseInt(startTime.slice(0,3)));
+      
       // if (!modTime&&!delTime){
       //   console.log(selectedIds);
       //   console.log(selectedIds.includes(newId.toString()));
@@ -304,8 +434,8 @@ const Url = () => {
       <button className={`${styles['Daily-bttn']}`} onClick={()=>{ToggleTimeAdd()}}> 일정추가 </button>
       <button className={`${styles['Daily-bttn']} ${modTime === true ? styles['onUse'] : styles['close']}`} onClick={()=>{ToggleTimeMod()}}> 일정변경 </button>
       <button className={`${styles['Daily-bttn']} ${delTime === true ? styles['onUse'] : styles['close']}`} onClick={()=>{ToggleTimeDel()}}> 일정삭제 </button>
-      <button className={`${styles['Daily-bttn']}`}> 운동스케줄 </button>
-      <button className={`${styles['Daily-bttn']}`}> 식사스케줄 </button>
+      <button className={`${styles['Daily-bttn']}`} onClick={()=>{setExcerciseTime()}}> 운동스케줄 </button>
+      <button className={`${styles['Daily-bttn']}`} onClick={()=>{setDietTime()}}> 식사스케줄 </button>
       <div className={`${styles['Calendar']} + ${isSelectDate === true ? styles['active'] : styles['close']}`} id='C'>
             <Calendar onChange={handleDateChange} value={value} formatDay={(locale,date) => moment(date).format("DD")}></Calendar>
             {moment(value).format("YYYY년 MM월 DD일")}
@@ -315,7 +445,7 @@ const Url = () => {
       </div>
         <Timetable/>
         <Schedule/>
-        <Timetask selectedId={calcId} selectedName={applyName} selectedHeight={selectHeight} selectedTimes={selectTime} modState={modTime} delState={delTime} modToggle={modToggle}  modId={modId} ToggleSelectedMod={ToggleSelectedMod} getModId={getModId} getSelectedIds={getSelectedIds} getTimeTables={getTimeTables} />
+        <Timetask selectedId={calcId} selectedName={applyName} selectedHeight={selectHeight} selectedTimes={selectTime} modState={modTime} delState={delTime} modToggle={modToggle}  modId={modId} isExcercise={isExcercise} isDiet={isDiet}  ToggleSelectedMod={ToggleSelectedMod} ToggleIsExcercise={ToggleIsExcercise} ToggleIsDiet={ToggleIsDiet} getModId={getModId} getSelectedIds={getSelectedIds} getTimeTables={getTimeTables} />
         <div className={`${styles['Add-input']} + ${addTime === true ? styles['active'] : styles['close']}`}>
           <div className={`${styles['input-radius']}`}>
             <div className={`${styles['input-container']}`}>
@@ -323,6 +453,9 @@ const Url = () => {
                 type = "number"
                 value = {selectId}
               >
+              </div>
+              <div className="text-2xl">
+                Add Timetask
               </div>
               <div className={`${styles['Name']}`}>
               일정 :　
@@ -350,34 +483,45 @@ const Url = () => {
           </div>
         </div>
         <div className={`${styles['Mod-input']} ${modToggle===true? styles['active']:styles['close']}`}>
-          <div className = {`${styles['Id-input']}`}
-                type = "number"
-                value = {selectId}
-          ></div>
-          <input
-                className = {`${styles['Name-input']}`}
-                type = "text"
-                value ={nameValue}
-                onChange ={handleNameValue}
-          />
-          <input
-                className = {`${styles['Start-time']}`}
-                type = "time"
-                id = "stime"
-                onChange ={handleStartTime}
-                value = {startTime}
-              />
-              ~
-              <input
-                className = {`${styles['End-time']}`}
-                type = "time"
-                id = "etime"
-                min = {startTime}
-                onChange={handleEndTime}
-                value = {endTime}
-              />
-          <button className="time-confirm" onClick={()=>{setModToggle(false); timeCalc();}}>확인</button>
-        </div>
+          <div className={`${styles['input-radius']}`}>
+              <div className={`${styles['input-container']}`}>
+                <div className = {`${styles['Id-input']}`}
+                      type = "number"
+                      value = {selectId}
+                ></div>
+                <div className="text-2xl">
+                  Modify Timetask
+                </div>
+                <div className={`${styles['Name']}`}>
+                  일정 :　
+                  <input
+                      className = {`${styles['Name-input']}`}
+                      type = "text"
+                      value ={nameValue}
+                      onChange ={handleNameValue}
+                />
+                </div>
+                  시간 :　
+                <input
+                      className = {`${styles['Start-time']}`}
+                      type = "time"
+                      id = "stime"
+                      onChange ={handleStartTime}
+                      value = {startTime}
+                    />
+                    ~
+                    <input
+                      className = {`${styles['End-time']}`}
+                      type = "time"
+                      id = "etime"
+                      min = {startTime}
+                      onChange={handleEndTime}
+                      value = {endTime}
+                    />
+                <button className="time-confirm" onClick={()=>{setModToggle(false); timeCalc();}}>확인</button>
+              </div>
+            </div>
+          </div>
       </div>
     );
 }

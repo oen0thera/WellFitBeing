@@ -1,15 +1,27 @@
 import React,{useState, useEffect} from 'react';
 import styles from './Timetask.module.css';
 
-const Timetask = ({selectedId, selectedName, selectedHeight, selectedTimes, modState, delState, modToggle, modId, ToggleSelectedMod, getModId, getSelectedIds, getTimeTables }) => {
+const Timetask = ({selectedId, selectedName, selectedHeight, selectedTimes, modState, delState, modToggle, modId, isExcercise, isDiet, ToggleSelectedMod,ToggleIsExcercise, ToggleIsDiet, getModId, getSelectedIds, getTimeTables }) => {
     console.log(selectedId);
     console.log(selectedName);
     console.log(selectedHeight);
     console.log(modState);
     console.log(modId);
-    console.log(selectedTimes);    
-
+    console.log(selectedTimes);
+    if(selectedTimes){
+        console.log(selectedTimes[0]===selectedTimes[1])    
     
+        if (selectedTimes[0]===selectedTimes[1]){
+            selectedId='';
+        }
+    }
+    const[width,setWidths] = useState(()=> {
+        const newWidths = {};
+        for (let i=1; i<=120; i++){
+          newWidths[i] ='40px';
+        }
+        return newWidths;
+    });
     const[height,setHeights] = useState(()=> {
         const newHeights = {};
         for (let i=1; i<=120; i++){
@@ -17,6 +29,29 @@ const Timetask = ({selectedId, selectedName, selectedHeight, selectedTimes, modS
         }
         return newHeights;
     });
+
+    const[margin,setMargins] = useState(()=> {
+        const newMargins = {};
+        for(let i=1; i<=120; i++){
+            newMargins[i] = '0px';
+        }
+        return newMargins;
+    })
+
+    const[left, setLeft] = useState(()=>{
+        const newLeft = {};
+        for(let i=1; i<=120; i++){
+            newLeft[i] = '0px';
+        }
+        return newLeft;
+    })
+    const[color, setColor] = useState(()=>{
+        const newColor = {};
+        for(let i=1; i<=120; i++){
+            newColor[i] = '#4ade80';
+        }
+        return newColor;
+    })
     const[name,setNames] = useState(()=>{
         const newNames = {};
         for (let i=1; i<=120; i++){
@@ -46,11 +81,55 @@ const Timetask = ({selectedId, selectedName, selectedHeight, selectedTimes, modS
     useEffect(()=>{
         console.log("times:", time);
         console.log("selectedIdTimes:", selectedIdTimes);
-    },[selectedIdTimes,time])
+        console.log("margin:",margin);
+    },[selectedIdTimes,time,margin])
+    useEffect(()=>{
+        console.log("Excercise, Diet", isExcercise, isDiet);
+        if(isExcercise){
+            setWidths((prevWidths)=>({
+                ...prevWidths,
+                [selectedId] : `913px`
+            }));
+            setLeft((prevLefts)=>({
+                ...prevLefts,
+                [selectedId] : `-80px`
+            }));
+            setColor((prevColors)=>({
+                ...prevColors,
+                [selectedId] : `#743531`
+            }))
+            console.log(color);
+            ToggleIsExcercise();
+        } ;
+        
+        if(isDiet){
+            setWidths((prevWidths)=>({
+                ...prevWidths,
+                [selectedId] : `913px`
+            }));
+            setLeft((prevLefts)=>({
+                ...prevLefts,
+                [selectedId] : `-80px`
+            }));
+            setColor((prevColors)=>({
+                ...prevColors,
+                [selectedId] : `#ffd400`
+            }))
+            console.log(color);
+            ToggleIsDiet();
+        } ;
+        
+    },[isExcercise,isDiet,width,color])
+    
     useEffect(()=>{
         delTime(modId);
         if (selectedId&&selectedHeight) {
             const newHeight = parseFloat(selectedHeight);
+            const newMargin = parseFloat(selectedTimes[0].slice(3,6));
+            setMargins((prevMargins)=>({
+                ...prevMargins,
+                [selectedId] : `${(newMargin/60)*2*25}px`
+            }));
             setHeights((prevHeights)=>({
                 ...prevHeights,
                 [selectedId] : `${newHeight * 2 * 25}px`,
@@ -161,7 +240,7 @@ return(
                     className={`${styles['Time-line']} ${selectedIdHeights.includes(`${index+1}`)? styles['selected'] : styles['close']}`}
                     id={`${index + 1}`}
                     value={{name: name[index+1]}}
-                    style={{ height: height[index + 1]}}
+                    style={{ width: width[index+1], height: height[index + 1], marginTop: margin[index+1], left: left[index+1], backgroundColor: color[index+1]}}
                     onClick= {()=>{modifyTime({modState, id:index+1, name: name[index+1], time: time[index+1]}); deleteTime({delState, id:index+1}); toggleModInput();}}
                     >
                     

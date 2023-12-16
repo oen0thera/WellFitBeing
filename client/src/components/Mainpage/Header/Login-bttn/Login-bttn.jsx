@@ -81,7 +81,7 @@ const ToggleLoginPopup = () =>{
     `Logged Out`
   return (
     <div className={`${styles["Login-div"]}`}>
-      <div className='items-center justify-items-end'>
+      <div className='h-10 items-center justify-items-end z-5'>
       {isGoogleLogin&&<Profile photoURL={photo} displayName={name}/>}
       <button className={`${styles['ModifyInfo-bttn']} + ${isLogin === true ? styles[''] : styles['close']}`} id="ModifyInfo-bttn" value={userInfo} onClick={ToggleModifyPopup}>{isLogin?'Modify': 'Closed'}</button>
       <button className={`${styles['Login-bttn']} + ${isLogin === true ? styles['active'] : styles['']}`} id="Login-bttn" value={userInfo.id} onClick={()=>{ToggleLogindiv(); NavLogbttn();}}>{isLogin?'Log-out':'Log-in'}</button>
@@ -89,24 +89,24 @@ const ToggleLoginPopup = () =>{
         <div className={`${styles['ModifyInfo-content']}`}>
           <div className={`${styles['ModifyInfo-Inputspace']}`}>
             <div>
-              <h className="text-2xl">사용자 정보 변경</h>
+              <h1 className="text-2xl">사용자 정보 변경</h1>
             </div>
             <div>
-              <h>이름</h> 
+              <h1>이름</h1> 
               <input className={`${styles['ModifyInfo-Input']}`} type="text"/>
             </div>
             <div className={`${styles['Modifygender-div']}`}>
-              <h className={`${styles['gender-label']}`}>성별</h>
+              <h1 className={`${styles['gender-label']}`}>성별</h1>
               남성<input type="radio" className={`${styles['Modifygender-input']}`} name='gender'/>
               여성<input type="radio" className={`${styles['Modifygender-input']}`} name='gender'/>
             </div>
             <div>
-              <h>나이</h>
+              <h1>나이</h1>
               <input className={`${styles['ModifyInfo-Input']} + ${styles['age']}`} type="number" min="1"/>
             </div>
             <div>
             <div>
-              <h>E-mail</h>
+              <h1>E-mail</h1>
               <input className={`${styles['ModifyInfo-Input']} + ${styles['email']} + ${styles['id']}`} type="text"/>
               @<select className={`${styles['ModifyInfo-Input']} + ${styles['email']} + ${styles['loc']}`}>
                 <option value="Naver">naver.com</option>
