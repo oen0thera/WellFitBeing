@@ -20,7 +20,7 @@ exports.signin = async (req, res)=>{
       if (pw === String(req.body.pw)) {
         await res.cookie('isSignIn', true, { maxAge: 3600000 });
         await res.cookie('sessionID', req.sessionID || 1, { maxAge: 3600000 });
-
+        user.data.isLogin = true;
         // 데이터베이스에서 수정된 내용 저장
         const query_ =  await query("UPDATE user SET token = ? WHERE id = ?", [req.sessionID || 1, req.body.id])
         

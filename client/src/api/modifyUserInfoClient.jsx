@@ -3,38 +3,36 @@ import axios from 'axios';
 export default class ModifyUserInfoClient {
     // 생성자(constructor)가 생략됨
 
-    modifyUserInfo(id, pw, em) {
+    modifyUserInfo(id, pw, age, gen, em) {
         this.id = id;
         this.pw = pw;
+        this.age = age
+        this.gen = gen;
         this.em = em;
+        console.log(this.id,this.pw,this.age,this.gen,this.em);
         return this.modify(); // 실제로는 여기서 axios.post 등의 로직을 포함할 것입니다.
     }
-
+    
     async modify() {
-        const userValidation = await this.checkUserValidation();
         
-        if (userValidation) {
-            try {
-                const response = await axios.post("http://localhost:8080/user/modify", {
+        try {
+            const response = await axios.post("http://localhost:8080/user/modifyuserinfo", {
+                id: this.id,
+                modifyinfo:{
                     id: this.id,
                     pw: this.pw,
-                    em: this.em,
-                });
+                    age: this.age,
+                    gender: this.gen,
+                    email: this.em,
+                }
+            });
 
-                console.log(response.data);
-                return response.data;
-            } catch (error) {
-                console.error("에러:", error);
-            }
-        } else {
-            console.log("사용자에게 수정 권한이 없습니다. 수정이 취소되었습니다.");
-            return null;
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error("에러:", error);
         }
     }
 
-    async checkUserValidation() {
-        const res = await axios.get(`http://localhost:4000/auth/check-permission?id=${this.id}`);
-        console.log("checkUserValidation:", res);
-        return res;
-    }
+    
 }

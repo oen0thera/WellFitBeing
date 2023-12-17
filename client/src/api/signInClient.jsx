@@ -4,6 +4,8 @@ export default class signInClient {
     constructor(id,passwd) {
         this.id = id;
         this.pw = passwd;
+        this.sessionID = '';
+        this.isLogin = false;
     }
     async signIn(id){
         // return axios.get("fakeData/login.json");
@@ -19,6 +21,8 @@ export default class signInClient {
             },
             id : this.id,
             pw : this.pw,
+            sessionID: this.sessionID,
+            isLogin: this.isLogin,
             withCredentials:true,
             session:{
                 is_login : false

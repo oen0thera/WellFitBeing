@@ -6,9 +6,10 @@ import moment from 'moment';
 import Schedule from './Schedule';
 import Timetable from './Timetable';
 import Timetask from './Timetask';
+import axios from 'axios';
 import './Calendar.css';
 
-const Url = () => {
+const Url = ({userId}) => {
 
     const [value, onChange] = useState(new Date());
     const monthOfActiveDate = moment(value).format('YYYY-MM');
@@ -261,9 +262,20 @@ const Url = () => {
       return 0;
     }
     // 추후에 지울것. 테스트용 함수 코드
-    const setExcerciseTime = () =>{
-      setRecommendExcerciseTime(['18:20','19:40']);
-    }
+    // const setExcerciseTime = () =>{
+    //   setRecommendExcerciseTime(['18:20','19:40']);
+    // }
+    const setExcerciseTime = async () => {
+      console.log(userId);
+      const response = await axios.post("http://localhost:8081/scheduler/ExerciseScheduler",{
+              "id": userId,
+              "time" :'time',
+              "sessionID" : userId
+          });
+          console.log(response.data.data.exercise);
+          setRecommendExcerciseTime([response.data]);
+          return response.data;
+      }
     const setDietTime = () =>{
       setRecommendDietTime(['12:30','13:30']);
     }

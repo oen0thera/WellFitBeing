@@ -6,6 +6,7 @@ const query = util.promisify(sql.query).bind(sql);
 
 exports.modifyuserinfo = async (req, res)=>{
   try {
+    console.log(req.data);
     if (req.body.modifyinfo === undefined){
         res.status(500).json({ message: "modifyinfo not found", data: null });
     }else{

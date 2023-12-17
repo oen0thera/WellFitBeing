@@ -42,7 +42,8 @@ function convertToTimeArray(timeString) {
 
 // 새 객체 생성
 exports.ExerciseScheduler = async (req,res)=>{
-
+    console.log(req);
+    console.log("req body:",req.body);
     if(!req.body){
         res.status(400).send({
             message: "Content can not be empty!"

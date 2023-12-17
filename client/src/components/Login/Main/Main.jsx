@@ -34,9 +34,11 @@ export default function Main() {
           if (res) {
               const id = res.data.data.data.id;
               const passwd = res.data.data.data.pw;
+              const isLogin = res.data.data.data.isLogin;
               const cookies = res.headers['Set-Cookie'];
-              console.log(res.data.data.data.id);
-              if (info.id === id && info.passwd === passwd) {
+              console.log(res.data.data);
+              console.log(res.data.data.data.isLogin);
+              if (res.data.data.data.isLogin) {
                   navigate("/",{state:{id:id}});
                   console.log("Login");
               } else {

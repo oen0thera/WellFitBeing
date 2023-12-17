@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef , useEffect} from 'react';
 import { FaReact, FaUserCircle, FaHistory, FaRegStar, FaFilePdf, FaCog, FaQuestionCircle } from "https://cdn.skypack.dev/react-icons@4.1.0/fa";
 import styles from "./Mainpage.module.css";
 import Menu from './Header/Menu/Menu';
@@ -16,7 +16,7 @@ const App = () => {
   const [FiledivIsOpen, FiledivSetIsOpen] = useState(false);
   const [LogindivIsOpen, LogindivSetIsOpen] = useState(false);
   const [FileIsLoaded, FileLoadSetIsOpen] = useState(false)
-  
+  const [userId,setUserId] = useState('');
 
     const LoadedFile = () => {
         if (FileIsLoaded) {
@@ -26,6 +26,13 @@ const App = () => {
             FileLoadSetIsOpen(true);
         }
     }
+    const getUserId = (id) => {
+      setUserId(id);
+    }
+    useEffect(() => {
+      console.log(userId);
+    }, [userId]);
+    
   return(
 
     <QueryClientProvider client={QC}>
@@ -36,9 +43,9 @@ const App = () => {
          <Menu/>
        </section>
        <Title/>
-       <Login/>
+       <Login getUserId={getUserId}/>
       </div>
-      <Url/>
+      <Url userId={userId}/>
      </div>
      </QueryClientProvider>
   );
