@@ -1,12 +1,17 @@
--- 기존 USER 테이블을 삭제합니다.
 DROP TABLE IF EXISTS USER;
 
--- 수정된 USER 테이블을 생성합니다.
 CREATE TABLE USER (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    money INT DEFAULT 0,
-    phonenum VARCHAR(15),
-    time DATETIME DEFAULT CURRENT_TIMESTAMP, -- DATETIME으로 변경하고 기본값을 현재 시간으로 설정합니다.
-    schedule TEXT
+    id VARCHAR(255) PRIMARY KEY DEFAULT 0,
+    pw VARCHAR(255) DEFAULT 0,
+    email VARCHAR(255) DEFAULT 0,
+    age INT DEFAULT 0,
+    gender INT DEFAULT 0,
+    token VARCHAR(255) DEFAULT 0 
+);
+
+DROP TABLE IF EXISTS SCHEDULER;
+
+CREATE TABLE SCHEDULER (
+    id VARCHAR(255) PRIMARY KEY DEFAULT 0,
+    time TEXT 
 );

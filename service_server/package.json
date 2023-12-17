@@ -1,5 +1,5 @@
 {
-  "name":"service_server",
+  "name": "service_server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
