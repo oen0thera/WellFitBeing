@@ -273,7 +273,7 @@ const Url = ({userId}) => {
               "sessionID" : userId
           });
           console.log(response.data.data.exercise);
-          setRecommendExcerciseTime([response.data]);
+          setRecommendExcerciseTime([response.data.data.exercise]);
           return response.data;
       }
     const setDietTime = () =>{
@@ -281,8 +281,15 @@ const Url = ({userId}) => {
     }
     useEffect(()=>{
       console.log('recommendExcerciseTime:', recommendExcerciseTime);
+      let recommendTime = JSON.stringify(recommendExcerciseTime[0]);
       let startTime = JSON.stringify(recommendExcerciseTime[0]);
-      let endTime = JSON.stringify(recommendExcerciseTime[1]);
+      if(startTime){
+        startTime = startTime.slice(1,7);
+      }
+      let endTime = JSON.stringify(recommendExcerciseTime[0]);
+      if(endTime){
+        endTime = endTime.slice(9,15);
+      }
       console.log(startTime,endTime);
       if(startTime&&endTime){
         let newId = timeSelect(parseInt(startTime.slice(1,3)));
