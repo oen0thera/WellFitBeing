@@ -30,10 +30,12 @@ export default function Main() {
     async function handleLogin() {
       try {
           const res = await member.loginInfo();
-          console.log(res)
+          console.log("LOGINNNN",res)
           if (res) {
-              const id = res.data.user_id;
-              const passwd = res.data.user_pw;
+              const id = res.data.data.data.id;
+              const passwd = res.data.data.data.pw;
+              const cookies = res.headers['Set-Cookie'];
+              console.log(res.data.data.data.id);
               if (info.id === id && info.passwd === passwd) {
                   navigate("/",{state:{id:id}});
                   console.log("Login");

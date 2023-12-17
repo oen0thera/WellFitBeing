@@ -9,25 +9,29 @@ export default class signInClient {
         // return axios.get("fakeData/login.json");
         console.log(id);
         try{
-            const response = await axios.post(`/user/login`,
+            const response = await axios.post(`http://localhost:8080/user/signin`,
             {headers:{
                 "Content-Type":"application/json",
-                "Cookie":this.sessionid,
+                "Cookie":this.sessionID,
                 "Access-Control-Allow-Origin":"*",
                 "Access-Control-Allow-Methods":"GET, POST, PUT, DELETE",
                 "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token, Authorization, Accept,charset,boundary,Content-Length"    
             },
-            user_id : this.id,
-            user_pw : this.pw,
+            id : this.id,
+            pw : this.pw,
             withCredentials:true,
             session:{
                 is_login : false
-            }
+            },
             },
             
             );
-        
-            return response.data;
+            console.log(response.headers);
+            const allCookies = document.cookie;
+            console.log("쿠키값:", allCookies);
+            console.log("쿠키값 타입:", typeof allCookies);
+              
+            return response;
         }catch(error){
             console.error("Error:",error);
         }

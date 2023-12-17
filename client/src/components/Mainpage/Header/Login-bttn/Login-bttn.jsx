@@ -91,21 +91,21 @@ const ToggleLoginPopup = () =>{
             <div>
               <h1 className="text-2xl">사용자 정보 변경</h1>
             </div>
-            <div>
-              <h1>이름</h1> 
-              <input className={`${styles['ModifyInfo-Input']}`} type="text"/>
+            <div className="flex items-center">
+              <h1>이름</h1>
+              <input className={`${styles['ModifyInfo-Input']}`} type="text"/> 
             </div>
             <div className={`${styles['Modifygender-div']}`}>
-              <h1 className={`${styles['gender-label']}`}>성별</h1>
+              <h1 className={`${styles['gender-label']}`}>성별 </h1>
               남성<input type="radio" className={`${styles['Modifygender-input']}`} name='gender'/>
               여성<input type="radio" className={`${styles['Modifygender-input']}`} name='gender'/>
             </div>
-            <div>
+            <div className="flex items-center">
               <h1>나이</h1>
               <input className={`${styles['ModifyInfo-Input']} + ${styles['age']}`} type="number" min="1"/>
             </div>
             <div>
-            <div>
+            <div className="flex items-center">
               <h1>E-mail</h1>
               <input className={`${styles['ModifyInfo-Input']} + ${styles['email']} + ${styles['id']}`} type="text"/>
               @<select className={`${styles['ModifyInfo-Input']} + ${styles['email']} + ${styles['loc']}`}>

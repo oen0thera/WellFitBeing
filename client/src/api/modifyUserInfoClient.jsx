@@ -15,7 +15,7 @@ export default class ModifyUserInfoClient {
         
         if (userValidation) {
             try {
-                const response = await axios.post("http://localhost:4000/auth/modify", {
+                const response = await axios.post("http://localhost:8080/user/modify", {
                     id: this.id,
                     pw: this.pw,
                     em: this.em,

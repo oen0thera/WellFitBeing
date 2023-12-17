@@ -208,6 +208,8 @@
     padding:3px;
 }
 .Modifygender-div{
+    display: flex;
+    align-items : center;
     font-size: 15px;
 }
 .gender-label{

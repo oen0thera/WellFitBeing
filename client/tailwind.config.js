@@ -9,6 +9,7 @@ module.exports = {
       myGray: '#d1d5db',
       myBlue: "#6366f1",
       myGray_bold: '#6b7280',
+      placeholder:'#808080',
       slate300: '#cbd5e1',
       slate200: '#e2e8f0',
       titlegreen: '#4ade80',
