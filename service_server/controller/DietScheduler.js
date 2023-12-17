@@ -60,9 +60,9 @@ exports.DietScheduler = async (req,res)=>{
     const timeString = "1700,1900";
     const gaps = findGaps(timeString);
     
-    const diet_time = String(gaps[0].start-170)+ "," + String(gaps[0].start-70)
+    const diet_time = String(gaps[0].start-130)+ "," + String(gaps[0].start-30)
     
-    const scheduler_plus_diet_time =  String(gaps[0].start-100)+ "," + String(gaps[0].end)
+    const scheduler_plus_diet_time =  String(gaps[0].start-130)+ "," + String(gaps[0].end)
     const timetoArray = convertToTimeArray(diet_time)
     
     const new_scheduler = await Scheduler.findByID(req.body.id);

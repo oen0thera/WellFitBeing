@@ -42,8 +42,7 @@ function convertToTimeArray(timeString) {
 
 // 새 객체 생성
 exports.ExerciseScheduler = async (req,res)=>{
-    console.log(req);
-    console.log("req body:",req.body);
+
     if(!req.body){
         res.status(400).send({
             message: "Content can not be empty!"
@@ -62,9 +61,9 @@ exports.ExerciseScheduler = async (req,res)=>{
     const timeString = "1700,1800";
     const gaps = findGaps(timeString);
     
-    const exercise_time = String(gaps[0].end+70)+ "," + String(gaps[0].end+170)
+    const exercise_time = String(gaps[0].end+30)+ "," + String(gaps[0].end+130)
     
-    const scheduler_plus_exercise_time =  String(gaps[0].start)+ "," + String(gaps[0].end+100)
+    const scheduler_plus_exercise_time =  String(gaps[0].start)+ "," + String(gaps[0].end+130)
     const timetoArray = convertToTimeArray(exercise_time)
     
     const new_scheduler = await Scheduler.findByID(req.body.id);
