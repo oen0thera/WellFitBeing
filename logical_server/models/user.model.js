@@ -5,10 +5,13 @@ const query = util.promisify(sql.query).bind(sql);
 
 class User {
     constructor(user) {
-      this.user_id = user.user_id;
-      this.user_pw = user.user_pw;
-      this.user_phonenum = user.user_phonenum;
-      this.user_money = user.user_money;
+      this.id = user.id;
+      this.pw = user.pw;
+      this.email = user.email;
+      this.age = user.age;
+      this.gender = user.gender;
+      // 여자는 0, 남자는 1
+      this.token = user.token;
     }
 }
 
@@ -27,9 +30,9 @@ User.create = async (newUser)=>{
 };
 
 // user id로 조회
-User.findByID = async (user_id)=>{
+User.findByID = async (id)=>{
     try{
-        const res = await query('SELECT * FROM user WHERE user_id = ?',user_id)
+        const res = await query('SELECT * FROM user WHERE id = ?',id)
         if (res.length){
             return {err: null, data: res[0]}
         }
@@ -51,9 +54,9 @@ User.getAll = async () =>{
 };
 
 // customer id로 삭제
-User.removeOne = async (user_id)=>{
+User.removeOne = async (id)=>{
     try{
-        const res = await query('DELETE FROM user WHERE user_id = ?',user_id)
+        const res = await query('DELETE FROM user WHERE id = ?',id)
 
         if(res.affectedRows ==0){
             // id 결과가 없을 시 

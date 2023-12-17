@@ -7,24 +7,24 @@ exports.create = async (req,res)=>{
             message: "Content can not be empty!"
         });
     };
-
+    console.log("TESTING 12/17")
     const user = new User({
-        user_id: req.body.user_id,
-        user_pw: req.body.user_pw,
-        user_phonenum: req.body.user_phonenum,
-        user_money: req.body.user_money
+        user_id: req.body.user_id || 0,
+        user_pw: req.body.user_pw || 0,
+        user_money: req.body.user_money || 0
     });
 
     // 데이터베이스에 저장
-    await User.create(user).then((result)=>{
-      if(err){
+    await User.create(user)
+      .then((result) => {
+        // 여기서 if(err)는 불필요합니다. 에러 처리는 .catch() 블록에서 처리합니다.
+        res.status(200).json(result);  // result.data 대신에 result로 수정
+      })
+      .catch((err) => {
         res.status(500).send({
-            message:
-            result.err || "Some error occured while creating the user."
+          message: err.message || "Some error occurred while creating the user.",
         });
-      };
-      res.status(200).json(result.data)
-    }) 
+      });
 };
 
 
@@ -121,8 +121,8 @@ exports.logout = async (req, res)=>{
 }
 
 exports.register = async (req, res) => {
-    // pw, id, phonenum 중 하나라도 없는 경우
-    if (!req.body.user_pw || !req.body.user_id || !req.body.user_phonenum) {
+    // pw, id중 하나라도 없는 경우
+    if (!req.body.user_pw || !req.body.user_id) {
         res.status(400).send({ message: "Content can not be empty!" });
     }
 
@@ -138,7 +138,6 @@ exports.register = async (req, res) => {
     const user = new User({
         user_id: req.body.user_id,
         user_pw: req.body.user_pw,
-        user_phonenum: req.body.user_phonenum,
         user_money: req.body.user_money
     });
 
