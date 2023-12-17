@@ -47,6 +47,9 @@ exports.DietScheduler = async (req,res)=>{
             message: "Content can not be empty!"
         });
     };
+    if (req.body.sessionID === null || !req.body.sessionID || req.body.sessionID === 0){
+        res.status(404).json({ message: "Please complete the login first.", data: null  });
+    }
     
     const id = req.body.id || 0
     const ex_time = req.body.time || "1700,1900"

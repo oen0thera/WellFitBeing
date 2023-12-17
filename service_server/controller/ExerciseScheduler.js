@@ -42,11 +42,15 @@ function convertToTimeArray(timeString) {
 
 // 새 객체 생성
 exports.ExerciseScheduler = async (req,res)=>{
+
     if(!req.body){
         res.status(400).send({
             message: "Content can not be empty!"
         });
     };
+    if (req.body.sessionID === null || !req.body.sessionID || req.body.sessionID === 0){
+        res.status(404).json({ message: "Please complete the login first.", data: null  });
+    }
     
     const id = req.body.id || 0
     const ex_time = req.body.time || "1700,1800"
